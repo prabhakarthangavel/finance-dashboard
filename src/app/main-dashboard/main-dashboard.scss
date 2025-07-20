@@ -1,0 +1,66 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: var(--primary-bg-color);
+  padding: 40px;
+}
+
+.square-border {
+  border-radius: 2.75rem;
+  background: var(--secondary-bg-color);
+  padding-top: 30px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.split-div-into2 {
+  display: flex;
+  width: 100%;
+}
+
+.split2Half {
+  flex: 1 1 50%;
+  min-width: 0;
+}
+
+.flex-item-left {
+  flex: none;
+}
+
+.barChartMargin {
+  margin-right: 40px;
+}
+
+.card-title {
+  font-size: var(--text-primary-font-size);
+  font-weight: 500;
+  color: var(--text-primary-color);
+}
+
+
+.container {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+}
+
+.barchart-color1 {
+  height: 10px;
+  width: 10px;
+  background-color: #5470c6;
+  border-radius: 50%;
+}
+
+.barchart-color2 {
+  height: 10px;
+  width: 10px;
+  background-color: #73c0de;
+  border-radius: 50%;
+
+}
+
+.text {
+  font-size: var(--text-tertiary-font-size);
+  color: var(--text-secondary-color);
+}

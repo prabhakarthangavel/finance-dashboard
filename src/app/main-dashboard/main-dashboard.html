@@ -1,0 +1,36 @@
+<div class="split-div-into2">
+
+  <div class="square-border barChartMargin split2Half">
+
+    <div class="split-div-into2">
+      <div class="split2Half">
+        <span class="card-title">Overview</span>
+      </div>
+      <div class="split2Half flex-item-left">
+        <div class="container">
+          <span class="barchart-color1"></span>
+          <span class="text">This Week</span>
+        </div>
+        <div class="container">
+          <span class="barchart-color2"></span>
+          <span class="text">Last Week</span>
+        </div>
+      </div>
+    </div>
+
+    <div echarts [options]="barchart" class="chart"></div>
+  </div>
+
+  <div class="split2Half">
+    <div class="square-border">
+
+      <div class="split-div-into2">
+        <div class="split2Half">
+          <span class="card-title">Outcome Categories</span>
+        </div>
+      </div>
+
+      <div echarts [options]="piechart" class="chart"></div>
+    </div>
+  </div>
+</div>
