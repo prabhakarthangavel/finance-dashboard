@@ -17,6 +17,8 @@ export class MainDashboard implements OnInit {
   private textTertiary: string = '#9e9e9e';
   public barchart: any;
   public piechart: any;
+  public incomeChart: any;
+  public expenseChart: any;
 
   ngOnInit(): void {
     this.barchart = {
@@ -107,6 +109,25 @@ export class MainDashboard implements OnInit {
         }
       ]
     };
+
+    this.incomeChart = {
+  xAxis: {
+    type: 'category',
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    show: false
+  },
+  yAxis: {
+    type: 'value',
+    show: false
+  },
+  series: [
+    {
+      data: [820, 932, 901, 934, 1290, 1330, 1320],
+      type: 'line',
+      smooth: true
+    }
+  ]
+};
 
   }
 

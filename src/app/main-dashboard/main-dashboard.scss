@@ -13,12 +13,18 @@
   padding-right: 40px;
 }
 
-.split-div-into2 {
+.square-border-without-padding {
+  border-radius: 2.75rem;
+  background: var(--secondary-bg-color);
+  padding-top: 30px;
+}
+
+.row {
   display: flex;
   width: 100%;
 }
 
-.split2Half {
+.column {
   flex: 1 1 50%;
   min-width: 0;
 }
@@ -42,7 +48,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 5px;
+  padding: 0 5px 0 5px;
 }
 
 .barchart-color1 {
@@ -63,4 +69,16 @@
 .text {
   font-size: var(--text-tertiary-font-size);
   color: var(--text-secondary-color);
+}
+
+.charts-section {
+  margin-top: 40px;
+}
+
+.cards-margin {
+  margin-right: 20px;
+}
+
+.card-image {
+  border-radius: 50%; 
 }
