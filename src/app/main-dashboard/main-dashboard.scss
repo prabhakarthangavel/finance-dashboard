@@ -3,6 +3,13 @@
   min-height: 100vh;
   background: var(--primary-bg-color);
   padding: 40px;
+  min-width: 1700px; 
+}
+
+.main-content {
+  width: 1700px;
+  margin: 0 auto; 
+  padding: 0 20px;
 }
 
 .square-border {
@@ -16,7 +23,13 @@
 .square-border-without-padding {
   border-radius: 2.75rem;
   background: var(--secondary-bg-color);
-  padding-top: 30px;
+  padding-top: 20px;
+}
+
+
+.square-border-cc-card {
+  border-radius: 2.75rem;
+  padding: 20px 20px 0 20px;
 }
 
 .row {
@@ -34,7 +47,7 @@
 }
 
 .barChartMargin {
-  margin-right: 40px;
+  margin-right: 20px;
 }
 
 .card-title {
@@ -72,13 +85,49 @@
 }
 
 .charts-section {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .cards-margin {
   margin-right: 20px;
+  height: 220px; /* Set a fixed height for the card section */
 }
 
 .card-image {
-  border-radius: 50%; 
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 18px;
+}
+
+.cc-card-bg-color {
+  background: hsl(240, 91%, 68%);
+}
+
+.cc-card-sub-title {
+  color: var(--text-primary-color);
+  font-size: var(--text-secondary-font-size);
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+.cc-card-height {
+  height: 250px; /* Set a fixed height for the card */
+}
+
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.ag-grid-section {
+  width: 1620px;
+  height: 300px;
+  margin-top: 20px;
+}
+
+ag-grid-angular {
+  margin-top: 20px;
+  width: 1620px!important;
 }
