@@ -42,20 +42,18 @@
   min-width: 0;
 }
 
+.column-multiple {
+  flex: 1 1 25%;
+  min-width: 0;
+}
+
 .flex-item-left {
   flex: none;
 }
 
 .barChartMargin {
-  margin-right: 20px;
+  margin-right: 10px; // margin for tiles
 }
-
-.card-title {
-  font-size: var(--text-primary-font-size);
-  font-weight: 500;
-  color: var(--text-primary-color);
-}
-
 
 .container {
   display: inline-flex;
@@ -85,7 +83,7 @@
 }
 
 .charts-section {
-  margin-top: 20px;
+  margin-top: 10px; // margin for tiles
 }
 
 .cards-margin {
@@ -124,10 +122,71 @@ p {
 .ag-grid-section {
   width: 1620px;
   height: 300px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 ag-grid-angular {
   margin-top: 20px;
   width: 1620px!important;
+}
+
+.basic-info-section {
+  height: 380px; /* Set a fixed height for tiles */
+}
+
+.info-section {
+  margin-top: 20px;
+}
+
+.primary-text {
+  font-size: var(--text-primary-font-size);
+  font-weight: 500;
+  color: var(--text-primary-color);
+}
+
+.secondary-text {
+  font-size: var(--text-secondary-font-size);
+  color: var(--text-secondary-color);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.teritarty-text {
+  font-size: var(--text-tertiary-font-size);
+  color: var(--text-tertiary-color);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.secondary-text-with-primary-color {
+  font-size: var(--text-secondary-font-size);
+  color: var(--text-primary-color);
+  font-weight: 450;
+  margin-bottom: 10px;
+}
+
+.flex-row-container {
+  display: flex; 
+  flex-wrap: wrap; 
+}
+
+.flex-column-item {
+  padding: 10px;
+  flex: 1;
+}
+
+.flex-item-40 {
+  flex: 2 1 0%;
+ }
+
+.flex-item-20 {
+  flex: 1 1 0%;
+}
+
+.coupon-section-divider {
+  margin-left: 20px;
+}
+
+.coupon-alt-text-space {
+  margin-top: 25px;
 }
