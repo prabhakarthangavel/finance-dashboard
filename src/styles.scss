@@ -14,6 +14,8 @@ $text-secondary: #bdbdbd; // Slightly darker than $text-primary
 $text-tertiary: #9e9e9e; // Darker than $text-secondary
 $text-quaternary: #7d7d7d; // Darker than $text
 
+$texarea-bg: #F5F5F5;
+
 $my-darkblue-palette: mat.m2-define-palette((50: #e6e6f2,
       100: #ccccde,
       200: #b3b3c9,
@@ -100,4 +102,9 @@ body {
     --text-primary-font-size: 20px; 
   --text-secondary-font-size: 14px;
   --text-tertiary-font-size: 12px;
+
+  --text-area-bg-color: #F5F5F5;
+
+  --text-chat-question-bg-color: #4d4d77;
+  --text-chat-reply-bg-color: #66668c;
 }

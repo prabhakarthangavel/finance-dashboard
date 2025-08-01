@@ -3,7 +3,7 @@ import { NgxEchartsModule, provideEchartsCore } from 'ngx-echarts';
 import { AgGridAngular } from 'ag-grid-angular';
 import { AllCommunityModule, ModuleRegistry, ColDef, Theme, themeQuartz } from "ag-grid-community";
 import { CommonModule } from '@angular/common';
-import { UnderlyingFields } from '../models/dashboard-models';
+import { BaarierMonitoringFields, UnderlyingFields } from '../models/dashboard-models';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -30,10 +30,14 @@ export class MainDashboard implements OnInit {
   public incomeChart: any;
   public expenseChart: any;
   public lineChart: any;
+  public underlyingChart: any;
+  public isOverviewSelected: boolean = false;
 
   //ag-grid variables
-  public rowData: UnderlyingFields[] = [];
-  public colDefs: ColDef<UnderlyingFields>[] = [];
+  public underlyingData: UnderlyingFields[] = [];
+  public underlyingDefs: ColDef<UnderlyingFields>[] = [];
+  public barrierMonitoringData: BaarierMonitoringFields[] = [];
+  public barrierMonitoringDefs: ColDef<BaarierMonitoringFields>[] = [];
   public defaultColDef: any;
   public myTheme = themeQuartz.withParams({});
   public theme: Theme | "legacy" = this.myTheme;
@@ -43,29 +47,38 @@ export class MainDashboard implements OnInit {
   }
 
   ngOnInit(): void {
-    // 
+
     this.barchart = {
       xAxis: {
         type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        data: ['Jun 25, 2025', 'Aug, 25, 2025', 'Sep 25, 2025', 'Oct 27, 2025'],
+        axisLabel: {
+          color: this.textTertiary
+        },
+        name: 'Projected Date',
+        nameLocation: 'middle',
+        nameGap: 35,
+        nameTextStyle: {
+          color: this.textSecondary,
+          fontSize: this.secondaryFontSize
+        }
+      },
+      yAxis: {
+        name: 'Coupon (%)',
+        nameLocation: 'middle',
+        nameGap: 35,
+        nameTextStyle: {
+          color: this.textSecondary,
+          fontSize: this.secondaryFontSize
+        },
+        type: 'value',
         axisLabel: {
           color: this.textTertiary
         }
       },
-      yAxis: {
-        type: 'value',
-        axisLabel: {
-          color: this.textTertiary
-        },
-      },
-      grid: {
-        right: 0,
-        left: "40px"
-      },
       series: [
-
         {
-          data: [120, 59, 150, 50, 70, 60, 130],
+          data: [120, 59, 150, 50],
           type: 'bar',
           itemStyle: {
             color: '#5470c6',
@@ -74,14 +87,18 @@ export class MainDashboard implements OnInit {
         },
         {
 
-          data: [30, 200, 150, 80, 70, 110, 150],
+          data: [30, 200, 150, 80],
           type: 'bar',
           itemStyle: {
             color: '#73c0de',
             borderRadius: [50, 50, 0, 0]
           }
         }
-      ]
+      ],
+      grid: {
+        right: "10px",
+        left: "50px",
+      },
     };
 
     this.piechart = {
@@ -198,11 +215,11 @@ export class MainDashboard implements OnInit {
       },
     };
 
-    this.rowData = [
+    this.underlyingData = [
       { underlyingTracker: '9988 HK Equity', description: 'Alibaba Group Holdings Ltd', currency: 'HKD', lastPrice: 123.30, unadjustedInitialPrice: 118.40, adjustedInitialPrice: 118.40, currentVsadjustedInitialPrice: '1.60%', basket: 'N/A', type: 'Stock', isin: 'KYG017191142' },
     ];
 
-    this.colDefs = [
+    this.underlyingDefs = [
       { field: "underlyingTracker", headerName: "Underlying Tracker" },
       { field: "description", headerName: "Description" },
       { field: "currency", headerName: "Currency" },
@@ -215,9 +232,7 @@ export class MainDashboard implements OnInit {
       { field: 'isin', headerName: 'ISIN' }
     ];
 
-    this.defaultColDef = {
-      flex: 1,
-    };
+    this.defaultColDef = { flex: 1, };
 
     this.theme = themeQuartz.withParams({
       headerBackgroundColor: this.agGridHeaderColor,
@@ -226,9 +241,41 @@ export class MainDashboard implements OnInit {
       backgroundColor: this.agGridBodyColor,
       cellTextColor: this.textTertiary,
       accentColor: this.agGridHoverColor,
-
-
     });
+
+    this.barrierMonitoringData = [
+      { putStrke: 100, autocall: 0, couponBarrier: 90, digitalCoupon: 5, upsideUpperBarrier: 120, upsideLowerBarrier: 110, downsideBarrier: 80, callStrike: 95, cap: 130, floor: 70 },
+      { putStrke: 105, autocall: 0, couponBarrier: 95, digitalCoupon: 6, upsideUpperBarrier: 125, upsideLowerBarrier: 115, downsideBarrier: 85, callStrike: 100, cap: 135, floor: 75 }
+    ];
+
+    this.barrierMonitoringDefs = [
+      { field: "putStrke", headerName: "Put Strike" },
+      { field: "autocall", headerName: "Autocall" },
+      { field: "couponBarrier", headerName: "Coupon Barrier" },
+      { field: "digitalCoupon", headerName: "Digital Coupon" },
+      { field: "upsideUpperBarrier", headerName: "Upside Upper Barrier" },
+      { field: "upsideLowerBarrier", headerName: "Upside Lower Barrier" },
+      { field: "downsideBarrier", headerName: "Downside Barrier" },
+      { field: "callStrike", headerName: "Call Strike" },
+      { field: "cap", headerName: "Cap" },
+      { field: "floor", headerName: "Floor" }
+    ];
+
+    this.underlyingChart = {
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: [150, 230, 224, 218, 135, 147, 260],
+          type: 'line'
+        }
+      ]
+    };
 
   }
 

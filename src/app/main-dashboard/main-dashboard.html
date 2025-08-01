@@ -1,235 +1,260 @@
 <main class="main-content">
-  <div class="row charts-section">
-    <div class="square-border barChartMargin column">
-
-      <div class="row">
-        <div class="column">
-          <span class="primary-text">Payoff Diagram</span>
-        </div>
-        <div class="column flex-item-left">
-          <div class="container">
-            <span class="barchart-color1"></span>
-            <span class="text">Derivative</span>
-          </div>
-          <div class="container">
-            <span class="barchart-color2"></span>
-            <span class="text">Underlying</span>
-          </div>
-        </div>
-      </div>
-
-
-      <div echarts [options]="lineChart" class="chart"></div>
-    </div>
-
-    <div class="column">
-      <div class="square-border">
-
-        <div class="row">
-          <div class="column">
-            <span class="primary-text">Basic Information</span>
-          </div>
-        </div>
-
-        <div class="basic-info-section">
-          <div class="info-section">
-            <div class="row">
-              <div class="column-multiple teritarty-text">Issuer/Counterparty</div>
-              <div class="column-multiple teritarty-text">Determination</div>
-              <div class="column-multiple teritarty-text">Note Sentiment</div>
-              <div class="column-multiple teritarty-text">Issue Date</div>
-            </div>
-            <div class="row">
-              <div class="column-multiple secondary-text">SG</div>
-              <div class="column-multiple secondary-text">Worst Of</div>
-              <div class="column-multiple secondary-text">Bullish</div>
-              <div class="column-multiple secondary-text">Jun 25, 2025</div>
-            </div>
-          </div>
-          <div class="info-section">
-            <div class="row">
-              <div class="column-multiple teritarty-text">Notional</div>
-              <div class="column-multiple teritarty-text">Coupon Paid(Nominal Currency)</div>
-              <div class="column-multiple teritarty-text">ISIN / Tranche Code</div>
-              <div class="column-multiple teritarty-text">Maturity</div>
-            </div>
-            <div class="row">
-              <div class="column-multiple secondary-text">SGD 480,000</div>
-              <div class="column-multiple secondary-text">SGD 0.0</div>
-              <div class="column-multiple secondary-text">XS3085323056</div>
-              <div class="column-multiple secondary-text">Oct 30, 20</div>
-            </div>
-          </div>
-          <div class="info-section">
-            <div class="row">
-              <div class="column-multiple teritarty-text">Asset</div>
-              <div class="column-multiple teritarty-text">Currency (If Quanto)</div>
-              <div class="column-multiple teritarty-text">Settlement</div>
-              <div class="column-multiple teritarty-text">Tenor</div>
-            </div>
-            <div class="row">
-              <div class="column-multiple secondary-text">Equity</div>
-              <div class="column-multiple secondary-text">SGD (Quanto)</div>
-              <div class="column-multiple secondary-text">Physical</div>
-              <div class="column-multiple secondary-text">4 Months</div>
-            </div>
-          </div>
-          <div class="info-section">
-            <div class="row">
-              <div class="column-multiple teritarty-text">Description</div>
-            </div>
-            <div class="row">
-              <div class="column-multiple secondary-text">Autocallable | Fixed CPN | Put</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="title"  [ngClass]="isOverviewSelected ? 'chat-mode-off' : 'chat-mode-on'">
+    <h1 class="primary-text">AI Chatbot!</h1>
+    <img src="assets/icon-ai.png" class="ai-icon">
+  </div>
+  <div class="navigation-bar">
+    <button class="nav-button active">Chat</button>
+    <button class="nav-button">Overview</button>
+  </div>
+  <div class="input-container">
+    <input type="text" class="custom-input" placeholder="Search something..." />
   </div>
 
-  <div class="row ag-grid-section square-border">
-    <div class="column">
-      <p class="primary-text">Underlyings</p>
-      <ag-grid-angular style="width: 80%; height: 80%;" [rowData]="rowData" [columnDefs]="colDefs"
-        [defaultColDef]="defaultColDef" [theme]="theme" />
-    </div>
-  </div>
 
-  <div class="flex-row-container">
-    <div class="flex-column-item flex-item-40">
+  <div *ngIf="isOverviewSelected">
+    <div class="row charts-section">
       <div class="square-border barChartMargin column">
         <div class="row">
           <div class="column">
-            <span class="primary-text">Cashflow Diagram</span>
+            <span class="primary-text">Payoff Diagram</span>
           </div>
           <div class="column flex-item-left">
             <div class="container">
               <span class="barchart-color1"></span>
-              <span class="text">Projected Cashflow</span>
+              <span class="text">Derivative</span>
             </div>
             <div class="container">
               <span class="barchart-color2"></span>
-              <span class="text">Paid</span>
+              <span class="text">Underlying</span>
             </div>
           </div>
         </div>
-
-        <div echarts [options]="barchart" class="chart"></div>
+        <div echarts [options]="lineChart" class="chart"></div>
       </div>
-    </div>
-    <div class="flex-column-item flex-item-40">
       <div class="column">
         <div class="square-border">
-
           <div class="row">
             <div class="column">
-              <span class="primary-text">Coupon</span>
+              <span class="primary-text">Basic Information</span>
             </div>
           </div>
-
           <div class="basic-info-section">
             <div class="info-section">
               <div class="row">
-                <div class="column-multiple teritarty-text">
-                  <div class="secondary-text-with-primary-color">Contigency</div>
-                  Contigency
-                </div>
-                <div class="column-multiple secondary-text coupon-alt-text-space">-</div>
-                <div class="column-multiple teritarty-text coupon-section-divider">
-                  <div class="secondary-text-with-primary-color">Step</div>
-                  Coupon Step
-                </div>
-                <div class="column-multiple secondary-text coupon-alt-text-space">0.00%</div>
+                <div class="column-multiple teritarty-text">Issuer/Counterparty</div>
+                <div class="column-multiple teritarty-text">Determination</div>
+                <div class="column-multiple teritarty-text">Note Sentiment</div>
+                <div class="column-multiple teritarty-text">Issue Date</div>
               </div>
               <div class="row">
-                <div class="column-multiple teritarty-text">Coupon Type</div>
-                <div class="column-multiple secondary-text">Fixed</div>
-                <div class="column-multiple teritarty-text coupon-section-divider">
-                  <div class="secondary-text-with-primary-color">Floating</div>
-                  Fixed Part
-                </div>
-                <div class="column-multiple secondary-text coupon-alt-text-space">-</div>
+                <div class="column-multiple secondary-text">SG</div>
+                <div class="column-multiple secondary-text">Worst Of</div>
+                <div class="column-multiple secondary-text">Bullish</div>
+                <div class="column-multiple secondary-text">Jun 25, 2025</div>
               </div>
             </div>
-
-            <div class="row">
-              <div class="column-multiple teritarty-text">Is Memory Coupon</div>
-              <div class="column-multiple secondary-text">-</div>
-              <div class="column-multiple teritarty-text coupon-section-divider">Interest Rate Index</div>
-              <div class="column-multiple secondary-text">-</div>
+            <div class="info-section">
+              <div class="row">
+                <div class="column-multiple teritarty-text">Notional</div>
+                <div class="column-multiple teritarty-text">Coupon Paid(Nominal Currency)</div>
+                <div class="column-multiple teritarty-text">ISIN / Tranche Code</div>
+                <div class="column-multiple teritarty-text">Maturity</div>
+              </div>
+              <div class="row">
+                <div class="column-multiple secondary-text">SGD 480,000</div>
+                <div class="column-multiple secondary-text">SGD 0.0</div>
+                <div class="column-multiple secondary-text">XS3085323056</div>
+                <div class="column-multiple secondary-text">Oct 30, 20</div>
+              </div>
             </div>
-            <div class="row">
-              <div class="column-multiple teritarty-text">Guarantee Perid</div>
-              <div class="column-multiple secondary-text">-</div>
-              <div class="column-multiple teritarty-text coupon-section-divider">Spread</div>
-              <div class="column-multiple secondary-text">-</div>
+            <div class="info-section">
+              <div class="row">
+                <div class="column-multiple teritarty-text">Asset</div>
+                <div class="column-multiple teritarty-text">Currency (If Quanto)</div>
+                <div class="column-multiple teritarty-text">Settlement</div>
+                <div class="column-multiple teritarty-text">Tenor</div>
+              </div>
+              <div class="row">
+                <div class="column-multiple secondary-text">Equity</div>
+                <div class="column-multiple secondary-text">SGD (Quanto)</div>
+                <div class="column-multiple secondary-text">Physical</div>
+                <div class="column-multiple secondary-text">4 Months</div>
+              </div>
             </div>
-
-
-            <div class="row">
-              <div class="column-multiple teritarty-text">Coupon Barrier</div>
-              <div class="column-multiple secondary-text">-</div>
-              <div class="column-multiple teritarty-text coupon-section-divider">Participation Rate</div>
-              <div class="column-multiple secondary-text">-</div>
+            <div class="info-section">
+              <div class="row">
+                <div class="column-multiple teritarty-text">Description</div>
+              </div>
+              <div class="row">
+                <div class="column-multiple secondary-text">Autocallable | Fixed CPN | Put</div>
+              </div>
             </div>
-            <div class="row">
-              <div class="column-multiple teritarty-text">Frequency</div>
-              <div class="column-multiple secondary-text">1 Month</div>
-              <div class="column-multiple teritarty-text coupon-section-divider">Cap</div>
-              <div class="column-multiple secondary-text">1</div>
-            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="row ag-grid-section square-border underlying-grid">
+      <div class="column ">
+        <p class="primary-text">Underlyings</p>
+        <ag-grid-angular style="width: 100%; height: 80%; margin-top: 20px;" [rowData]="underlyingData"
+          [columnDefs]="underlyingDefs" [defaultColDef]="defaultColDef" [theme]="theme" />
+      </div>
+    </div>
+
+    <div class="flex-row-container">
+      <div class="flex-column-item flex-item-40">
+        <div class="square-border barChartMargin column">
+          <div class="row">
+            <div class="column">
+              <span class="primary-text">Cashflow Diagram</span>
+            </div>
+            <div class="column flex-item-left">
+              <div class="container">
+                <span class="barchart-color1"></span>
+                <span class="text">Projected Cashflow</span>
+              </div>
+              <div class="container">
+                <span class="barchart-color2"></span>
+                <span class="text">Paid</span>
+              </div>
+            </div>
+          </div>
+          <div echarts [options]="barchart" class="chart"></div>
+        </div>
+      </div>
+      <div class="flex-column-item flex-item-40">
+        <div class="column">
+          <div class="square-border">
             <div class="row">
-              <div class="column-multiple teritarty-text">
+              <div class="column">
+                <span class="primary-text">Coupon</span>
+              </div>
+            </div>
+            <div class="basic-info-section">
+              <div class="info-section">
+                <div class="row">
+                  <div class="column-multiple teritarty-text">
+                    <div class="secondary-text-with-primary-color">Contigency</div>
+                    Contigency
+                  </div>
+                  <div class="column-multiple secondary-text coupon-alt-text-space">-</div>
+                  <div class="column-multiple teritarty-text coupon-section-divider">
+                    <div class="secondary-text-with-primary-color">Step</div>
+                    Coupon Step
+                  </div>
+                  <div class="column-multiple secondary-text coupon-alt-text-space">0.00%</div>
+                </div>
+                <div class="row">
+                  <div class="column-multiple teritarty-text">Coupon Type</div>
+                  <div class="column-multiple secondary-text">Fixed</div>
+                  <div class="column-multiple teritarty-text coupon-section-divider">
+                    <div class="secondary-text-with-primary-color">Floating</div>
+                    Fixed Part
+                  </div>
+                  <div class="column-multiple secondary-text coupon-alt-text-space">-</div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="column-multiple teritarty-text coupon-alt-text-space-adjust">Is Memory Coupon</div>
+                <div class="column-multiple secondary-text coupon-alt-text-space-adjust">-</div>
+                <div class="column-multiple teritarty-text coupon-section-divider">Interest Rate Index</div>
+                <div class="column-multiple secondary-text">-</div>
+              </div>
+              <div class="row">
+                <div class="column-multiple teritarty-text coupon-alt-text-space-adjust">Guarantee Perid</div>
+                <div class="column-multiple secondary-text coupon-alt-text-space-adjust">-</div>
+                <div class="column-multiple teritarty-text coupon-section-divider">Spread</div>
+                <div class="column-multiple secondary-text">-</div>
+              </div>
+              <div class="row">
+                <div class="column-multiple teritarty-text coupon-alt-text-space-adjust">Coupon Barrier</div>
+                <div class="column-multiple secondary-text coupon-alt-text-space-adjust">-</div>
+                <div class="column-multiple teritarty-text coupon-section-divider">Participation Rate</div>
+                <div class="column-multiple secondary-text">-</div>
+              </div>
+              <div class="row">
+                <div class="column-multiple teritarty-text coupon-alt-text-space-adjust">Frequency</div>
+                <div class="column-multiple secondary-text coupon-alt-text-space-adjust">1 Month</div>
+                <div class="column-multiple teritarty-text coupon-section-divider">Cap</div>
+                <div class="column-multiple secondary-text">1</div>
+              </div>
+              <div class="row">
+                <div class="column-multiple teritarty-text">
                   <div class="secondary-text-with-primary-color">Fixed Coupon</div>
                   Coupon
                 </div>
-              <div class="column-multiple secondary-text coupon-alt-text-space">12.00% p.a</div>
-              <div class="column-multiple teritarty-text coupon-section-divider">Floor</div>
-              <div class="column-multiple secondary-text">-</div>
+                <div class="column-multiple secondary-text coupon-alt-text-space">12.00% p.a</div>
+                <div class="column-multiple teritarty-text coupon-section-divider">Floor</div>
+                <div class="column-multiple secondary-text">-</div>
+              </div>
             </div>
           </div>
-
+        </div>
+      </div>
+      <div class="flex-column-item flex-item-20">
+        <div class="column">
+          <div class="square-border">
+            <div class="row">
+              <div class="column">
+                <span class="primary-text">Callability</span>
+              </div>
+            </div>
+            <div class="basic-info-section">
+              <div class="info-section">
+                <div class="row">
+                  <div class="column-multiple teritarty-text">Callable Feature</div>
+                  <div class="column-multiple secondary-text">Autocallable</div>
+                </div>
+                <div class="row">
+                  <div class="column-multiple teritarty-text">Frequency</div>
+                  <div class="column-multiple secondary-text">1 Month</div>
+                </div>
+                <div class="row">
+                  <div class="column-multiple teritarty-text">Non Call Period</div>
+                  <div class="column-multiple secondary-text">-</div>
+                </div>
+                <div class="row">
+                  <div class="column-multiple teritarty-text">Intial Autocal Level</div>
+                  <div class="column-multiple secondary-text">100.00%</div>
+                </div>
+                <div class="row">
+                  <div class="column-multiple teritarty-text">Autocall Setp Level</div>
+                  <div class="column-multiple secondary-text">-</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="flex-column-item flex-item-20">
-      <div class="column">
-        <div class="square-border">
 
+    <div class="row charts-section">
+      <div class="square-border barChartMargin flex-item-40 barrier-grid">
+        <div class="row">
+          <div class="column">
+            <p class="primary-text">Barrier Monitoring</p>
+          </div>
+        </div>
+        <ag-grid-angular style="width: 100%; height: 80%; margin-top: 20px;" [rowData]="barrierMonitoringData"
+          [columnDefs]="barrierMonitoringDefs" [defaultColDef]="defaultColDef" [theme]="theme" />
+      </div>
+      <div class="flex-item-20">
+        <div class="square-border">
           <div class="row">
             <div class="column">
-              <span class="primary-text">Callability</span>
+              <div class="secondary-text">Underlying(s)</div>
+              <div class="primary-text" style="font-size: 22px;">132.1</div>
+              <div class="teritarty-text charts-section">Date as 08:00 AM Jul 24, 2025</div>
             </div>
           </div>
-
           <div class="basic-info-section">
-            <div class="info-section">
-              <div class="row">
-                <div class="column-multiple teritarty-text">Callable Feature</div>
-                <div class="column-multiple secondary-text">Autocallable</div>
-              </div>
-              <div class="row">
-                <div class="column-multiple teritarty-text">Frequency</div>
-                <div class="column-multiple secondary-text">1 Month</div>
-              </div>
-              <div class="row">
-                <div class="column-multiple teritarty-text">Non Call Period</div>
-                <div class="column-multiple secondary-text">-</div>
-              </div>
-              <div class="row">
-                <div class="column-multiple teritarty-text">Intial Autocal Level</div>
-                <div class="column-multiple secondary-text">100.00%</div>
-              </div>
-              <div class="row">
-                <div class="column-multiple teritarty-text">Autocall Setp Level</div>
-                <div class="column-multiple secondary-text">-</div>
-              </div>
-            </div>
+            <div echarts [options]="underlyingChart" class="chart"></div>
           </div>
         </div>
       </div>
-
     </div>
+
   </div>
 </main>

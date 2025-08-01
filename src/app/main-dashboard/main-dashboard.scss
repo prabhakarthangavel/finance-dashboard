@@ -3,12 +3,12 @@
   min-height: 100vh;
   background: var(--primary-bg-color);
   padding: 40px;
-  min-width: 1700px; 
+  min-width: 1700px;
 }
 
 .main-content {
   width: 1700px;
-  margin: 0 auto; 
+  margin: 0 auto;
   padding: 0 20px;
 }
 
@@ -88,7 +88,8 @@
 
 .cards-margin {
   margin-right: 20px;
-  height: 220px; /* Set a fixed height for the card section */
+  height: 220px;
+  /* Set a fixed height for the card section */
 }
 
 .card-image {
@@ -110,7 +111,8 @@
 }
 
 .cc-card-height {
-  height: 250px; /* Set a fixed height for the card */
+  height: 250px;
+  /* Set a fixed height for the card */
 }
 
 
@@ -125,13 +127,17 @@ p {
   margin-top: 10px;
 }
 
-ag-grid-angular {
-  margin-top: 20px;
-  width: 1620px!important;
+.underlying-grid {
+  width: 1620px !important;
+}
+
+.barrier-grid {
+  width: 810px !important;
 }
 
 .basic-info-section {
-  height: 380px; /* Set a fixed height for tiles */
+  height: 380px;
+  /* Set a fixed height for tiles */
 }
 
 .info-section {
@@ -166,20 +172,21 @@ ag-grid-angular {
 }
 
 .flex-row-container {
-  display: flex; 
-  flex-wrap: wrap; 
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .flex-column-item {
-  padding: 10px;
+  padding-top: 10px;
   flex: 1;
 }
 
 .flex-item-40 {
-  flex: 2 1 0%;
- }
+  flex: 1.2 1 0%;
+}
 
 .flex-item-20 {
+  padding-left: 10px;
   flex: 1 1 0%;
 }
 
@@ -189,4 +196,104 @@ ag-grid-angular {
 
 .coupon-alt-text-space {
   margin-top: 25px;
+}
+
+.coupon-alt-text-space-adjust {
+  margin-top: -25px;
+}
+
+.title {
+  display: flex;
+  width: fit-content;
+  margin: 20px auto;
+
+  .primary-text {
+    font-size: 34px;
+    font-weight: 500;
+    color: var(--text-area-bg-color);
+  }
+}
+
+.chat-mode-on {
+  margin-top: 500px;
+}
+
+.chat-mode-off {
+  margin-top: 0px
+}
+
+.navigation-bar {
+  display: flex;
+  background-color: var(--text-area-bg-color);
+  padding: 3px;
+  border-radius: 25px;
+  width: fit-content;
+  margin: 20px auto;
+  height: 45px;
+}
+
+.nav-button {
+  background-color: transparent;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-button.active {
+  background-color: var(--primary-bg-color);
+  color: var(--text-primary-color);
+}
+
+.nav-button:hover:not(.active) {
+  background-color: #e0e2e5;
+}
+
+.input-container {
+  margin: 20px;
+  width: fit-content;
+  margin: 100px auto;
+}
+
+.custom-input {
+  width: 400px;
+  height: 35px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: sans-serif;
+  color: #333;
+  background-color: var(--text-area-bg-color);
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  &::placeholder {
+    color: #888;
+    opacity: 1;
+  }
+
+  &:focus {
+    background-color: #e0e2e5;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(90, 150, 255, 0.3);
+  }
+}
+
+.ai-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.chat-question-bg {
+  background-color: var(--text-chat-question-bg-color);
+}
+
+.chat-reply-bg {
+  background-color: var(--text-chat-reply-bg-color);
 }
