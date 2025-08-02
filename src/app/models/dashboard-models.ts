@@ -1,6 +1,6 @@
 
 export interface UnderlyingFields {
-    underlyingTracker: string;
+    underlyingTicker: string;
     description: string;
     currency: string;
     lastPrice: number;
@@ -24,4 +24,13 @@ export interface BaarierMonitoringFields {
     callStrike: number | string;
     cap: number | string;
     floor: number | string;
+}
+
+export interface ChatMessage {
+    text: string;
+    type: number; // 0 for user, 1 for bot
+}
+
+export class Constants {
+    public static UNDERLYING_HEADER = ['Underlying Ticker', 'Description', 'Currency', 'Last Price($)', 'Unadjusted Initial Price($)', 'Adjusted Initial Price($)', 'Current vs Adjusted Initial Price(%)', 'Basket', 'Type', 'ISIN'];
 }

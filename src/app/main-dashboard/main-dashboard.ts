@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgxEchartsModule, provideEchartsCore } from 'ngx-echarts';
 import { AgGridAngular } from 'ag-grid-angular';
 import { AllCommunityModule, ModuleRegistry, ColDef, Theme, themeQuartz } from "ag-grid-community";
 import { CommonModule } from '@angular/common';
-import { BaarierMonitoringFields, UnderlyingFields } from '../models/dashboard-models';
+import { BaarierMonitoringFields, ChatMessage, Constants, UnderlyingFields } from '../models/dashboard-models';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -15,7 +16,7 @@ import { BaarierMonitoringFields, UnderlyingFields } from '../models/dashboard-m
     echarts: () => import('echarts')
   })]
 })
-export class MainDashboard implements OnInit {
+export class MainDashboard implements OnInit, AfterViewChecked {
   private primaryFontSize = 20;
   private secondaryFontSize = 14;
   private tertiaryFontSize = 12;
@@ -42,7 +43,12 @@ export class MainDashboard implements OnInit {
   public myTheme = themeQuartz.withParams({});
   public theme: Theme | "legacy" = this.myTheme;
 
-  constructor() {
+  public chatMessages: ChatMessage[] = [];
+  public sanitizedHtmlContentArray: SafeHtml[] = [];
+  @ViewChild('chatContainer') public chatContainer!: ElementRef;
+  private table: string = '';
+
+  constructor(private sanitizer: DomSanitizer) {
     ModuleRegistry.registerModules([AllCommunityModule]);
   }
 
@@ -216,11 +222,11 @@ export class MainDashboard implements OnInit {
     };
 
     this.underlyingData = [
-      { underlyingTracker: '9988 HK Equity', description: 'Alibaba Group Holdings Ltd', currency: 'HKD', lastPrice: 123.30, unadjustedInitialPrice: 118.40, adjustedInitialPrice: 118.40, currentVsadjustedInitialPrice: '1.60%', basket: 'N/A', type: 'Stock', isin: 'KYG017191142' },
+      { underlyingTicker: '9988 HK Equity', description: 'Alibaba Group Holdings Ltd', currency: 'HKD', lastPrice: 123.30, unadjustedInitialPrice: 118.40, adjustedInitialPrice: 118.40, currentVsadjustedInitialPrice: '1.60%', basket: 'N/A', type: 'Stock', isin: 'KYG017191142' },
     ];
 
     this.underlyingDefs = [
-      { field: "underlyingTracker", headerName: "Underlying Tracker" },
+      { field: "underlyingTicker", headerName: "Underlying Ticker" },
       { field: "description", headerName: "Description" },
       { field: "currency", headerName: "Currency" },
       { field: "lastPrice", headerName: "Last Price($)" },
@@ -277,6 +283,57 @@ export class MainDashboard implements OnInit {
       ]
     };
 
+    const header = Constants.UNDERLYING_HEADER;
+    this.table = `<div><table><thead><tr>`;
+    for (let i = 0; i < header.length; i++) {
+      this.table += `<th><div class="table-header">${header[i]}</div></th>`;
+    }
+    this.table += `</tr></thead>`;
+    const columns = [{
+      underlyingTicker: '9988 HK Equity', description: 'Alibaba Group Holdings Ltd',
+      currency: 'HKD', lastPrice: 123.30, unadjustedInitialPrice: 118.40,
+      adjustedInitialPrice: 118.40, currentVsadjustedInitialPrice: '1.60%', basket: 'N/A',
+      type: 'Stock', isin: 'KYG017191142'
+    }];
+    this.table += `<tbody><tr>`;
+    for (let i = 0; i < columns.length; i++) {
+      this.table += `<td><div class="table-cells">${columns[i].underlyingTicker}</div></td>`;
+      this.table += `<td><div class="table-cells">${columns[i].description}</div></td>`;
+      this.table += `<td><div class="table-cells">${columns[i].currency}</div></td>`;
+      this.table += `<td><div class="table-cells">${columns[i].unadjustedInitialPrice}</div></td>`;
+      this.table += `<td><div class="table-cells">${columns[i].adjustedInitialPrice}</div></td>`;
+      this.table += `<td><div class="table-cells">${columns[i].currentVsadjustedInitialPrice}</div></td>`;
+      this.table += `<td><div class="table-cells">${columns[i].basket}</div></td>`;
+      this.table += `<td><div class="table-cells">${columns[i].type}</div></td>`;
+      this.table += `<td><div class="table-cells">${columns[i].isin}</div></td>`;
+    }
+    this.table += `</tr></tbody></table></div>`;
+  }
+
+  public chat(event: any): void {
+    if (event.value) {
+      const userMessage: ChatMessage = { text: event.value, type: 0 };
+      this.chatMessages.push(userMessage);
+      let message = event.value;
+      const rawHtmlContentArray: any = [`<div class="message-row outgoing">
+          <div class="message-bubble outgoing-bubble">
+            <p>${message}</p> 
+          </div>
+        </div>`];
+      rawHtmlContentArray.push(`<div class="message-row incoming">
+          <div class="message-bubble incoming-bubble">
+           ${this.table}
+          </div>
+        </div>`);
+      this.sanitizedHtmlContentArray = rawHtmlContentArray.map((html: any) =>
+        this.sanitizer.bypassSecurityTrustHtml(html)
+      );
+      // this.sanitizedHtmlContent = this.sanitizer.bypassSecurityTrustHtml(this.rawHtmlContent);
+    }
+  }
+
+  ngAfterViewChecked(): void {
+    this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
   }
 
 }

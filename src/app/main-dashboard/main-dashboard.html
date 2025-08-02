@@ -1,16 +1,38 @@
 <main class="main-content">
-  <div class="title"  [ngClass]="isOverviewSelected ? 'chat-mode-off' : 'chat-mode-on'">
+  <div class="title" [ngClass]="isOverviewSelected || chatMessages.length ? 'chat-mode-off' : 'chat-mode-on'">
     <h1 class="primary-text">AI Chatbot!</h1>
     <img src="assets/icon-ai.png" class="ai-icon">
   </div>
-  <div class="navigation-bar">
-    <button class="nav-button active">Chat</button>
-    <button class="nav-button">Overview</button>
-  </div>
-  <div class="input-container">
-    <input type="text" class="custom-input" placeholder="Search something..." />
+  <div class="navigation-bar" (click)="isOverviewSelected = !isOverviewSelected">
+    <button class="nav-button" [ngClass]="isOverviewSelected ? '' : 'active'">Chat</button>
+    <button class="nav-button" [ngClass]="isOverviewSelected ? 'active' : ''">Overview</button>
   </div>
 
+  <div *ngIf="!isOverviewSelected">
+    <!-- <div class="chat-container" #chatContainer [ngClass]="chatMessages.length ? 'chat-container-height' : ''">
+      <div *ngFor="let message of chatMessages">
+        <div class="message-row outgoing" *ngIf="message.type == 0">
+          <div class="message-bubble outgoing-bubble">
+            <p>{{message.text}}</p> 
+          </div>
+        </div>
+        <div class="message-row incoming" *ngIf="message.type == 1">
+          <div class="message-bubble incoming-bubble">
+            <div [innerHTML]="{{message.text}}"></div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="chat-container" #chatContainer [ngClass]="chatMessages.length ? 'chat-container-height' : ''">
+      <div *ngFor="let htmlContent of sanitizedHtmlContentArray" [innerHTML]="htmlContent">
+
+      </div>
+    </div>
+  </div>
+  <div class="input-container">
+    <input type="text" class="custom-input" (keyup.enter)="chat($event.target)"
+      placeholder="{{isOverviewSelected ? 'Search Overview...' : 'Search Something...' }}" />
+  </div>
 
   <div *ngIf="isOverviewSelected">
     <div class="row charts-section">
@@ -231,7 +253,7 @@
     </div>
 
     <div class="row charts-section">
-      <div class="square-border barChartMargin flex-item-40 barrier-grid">
+      <div class="square-border flex-item-40 barrier-grid">
         <div class="row">
           <div class="column">
             <p class="primary-text">Barrier Monitoring</p>
